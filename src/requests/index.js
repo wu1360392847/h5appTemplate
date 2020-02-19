@@ -3,13 +3,21 @@
  */
 
 import axios from 'axios'
-import apis from './apis.cfg'
 import qs from 'qs'
+// vue实例 (this)
+// import rootVueObj from '../main.js'
 
+// 不同环境不同地址
+let apis = {
+  production: 'http://www.api.kxf968.com', // 线上 (生成环境)
+  development: 'http://192.168.8.170:82', // 本地 (开发环境)
+  accessHomeData: 'http://www.xmyxapp.com' // 其他api
+}
+
+// ajax请求设置
 const ajax = axios.create({
-  baseURL: apis.baseURL
+  baseURL: process.env.NODE_ENV === 'production' ? apis.production : apis.development
 })
-
 // 发送前请求拦截
 ajax.interceptors.request.use(
   config => {

@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .tabbar {
   width: 25%;
   text-align: center;

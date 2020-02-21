@@ -1,41 +1,57 @@
 <template>
   <div id="app">
-    <router-view name="isLogin"></router-view>
-    <header>
-      <router-view name="AppHeader"></router-view>
-    </header>
-    <section class="section">
-      <router-view name="mainWindow"></router-view>
-    </section>
-    <footer>
-      <router-view name="AppFooter"></router-view>
-    </footer>
+    <div class="loginhtml">
+      <router-view name="AppLogin"></router-view>
+    </div>
+    <div class="apphtml">
+      <header class="apphtml_header">
+        <router-view name="AppHeader"></router-view>
+      </header>
+      <section class="apphtml_section">
+        <router-view name="mainWindow"></router-view>
+      </section>
+      <footer class="apphtml_footer">
+        <router-view name="AppFooter"></router-view>
+      </footer>
+    </div>
   </div>
 </template>
 
-<style lang="scss">
+<script>
+import './assets/css/commonStyle.css'
+export default {
+  name: 'app'
+}
+</script>
+
+<style lang="less">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  flex-direction: column;
   height: 100%;
 }
-header,
-footer {
+.apphtml {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.apphtml_header,
+.apphtml_footer {
   display: flex;
   width: 100%;
 }
-footer {
+.apphtml_footer {
   background: #fefefe;
   height: 12vw;
 }
-.section {
+.apphtml_section {
   flex: 1;
   overflow: auto;
 }
-.section::-webkit-scrollbar {
+.apphtml_section::-webkit-scrollbar {
   display: none;
 }
 </style>

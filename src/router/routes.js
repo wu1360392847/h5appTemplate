@@ -1,3 +1,6 @@
+/**
+ * 这里用于配置vue各种单页面级组件路由地址
+ */
 const Login = () => import('@/views/Login.vue')
 const Home = () => import('@/views/Home.vue')
 const Wallet = () => import('@/views/Wallet.vue')
@@ -9,7 +12,7 @@ const Footer = () => import('@/components/Footer.vue')
 export default [
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/login',
     meta: {
       isNav: false
     }
@@ -18,7 +21,7 @@ export default [
     path: '/login',
     name: 'login',
     components: {
-      isLogin: Login
+      AppLogin: Login
     },
     meta: {
     }

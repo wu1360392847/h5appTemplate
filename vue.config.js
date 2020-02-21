@@ -20,7 +20,7 @@ module.exports = {
   indexPath: 'index.html',
 
   // 默认在生成的静态资源文件名中包含hash以控制缓存
-  filenameHashing: true,
+  filenameHashing: false,
 
   // 构建多页面应用，页面的配置
   // pages: {
@@ -46,13 +46,13 @@ module.exports = {
   // },
 
   // 是否在开发环境下通过 eslint-loader 在每次保存时 lint 代码 (在生产构建时禁用 eslint-loader)
-  lintOnSave: process.env.NODE_ENV !== 'production',
+  lintOnSave: false,
 
   // 是否使用包含运行时编译器的 Vue 构建版本
-  runtimeCompiler: true,
+  runtimeCompiler: false,
 
   // Babel 显式转译列表
-  transpileDependencies: [],
+  // transpileDependencies: [],
 
   // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建
   productionSourceMap: false,
@@ -66,76 +66,94 @@ module.exports = {
   // 如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中
   // 如果你需要基于环境有条件地配置行为，或者想要直接修改配置，那就换成一个函数 (该函数会在环境变量被设置之后懒执行)。
   // 该方法的第一个参数会收到已经解析好的配置。在函数内，你可以直接修改配置，或者返回一个将会被合并的对象
-  configureWebpack: {
-    // externals: {
-    //   'vue': 'Vue',
-    //   'element-ui': 'ELEMENT',
-    //   'vue-router': 'VueRouter',
-    //   'vuex': 'Vuex'
-    // } // 防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖(用于csdn引入)
-    resolve: {
-      extensions: [".js", ".vue", ".json"], //文件优先解析后缀名顺序
-      alias: {
-        "@": path.resolve(__dirname, "./src"),
-        "@c": path.resolve(__dirname, "./src/components"),
-        "@v": path.resolve(__dirname, "./src/views"),
-        "@u": path.resolve(__dirname, "./src/utils"),
-        "@s": path.resolve(__dirname, "./src/service")
-      }, // 别名配置
-      plugins: []
-    },
-    optimization: {
-      runtimeChunk: "single",
-      splitChunks: {
-        chunks: "all",
-        maxInitialRequests: Infinity,
-        minSize: 10000, // 依赖包超过20000bit将被单独打包
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name (module) {
-              // get the name. E.g. node_modules/packageName/not/this/part.js
-              // or node_modules/packageName
-              const packageName = module.context.match(
-                /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-              )[1];
-              // npm package names are URL-safe, but some servers don't like @ symbols
-              return `npm.${packageName.replace("@", "")}`;
+  configureWebpack: (config) => {
+    if (process.env.NODE_ENV === 'production') {
+      // 生产环境
+      config.mode = 'production'
+      // config.externals= {
+      //   'vue': 'Vue',
+      //   'element-ui': 'ELEMENT',
+      //   'vue-router': 'VueRouter',
+      //   'vuex': 'Vuex'
+      // } // 防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖(用于csdn引入)
+      config.resolve = {
+        extensions: [".js", ".vue", ".json"], //文件优先解析后缀名顺序
+        alias: {
+          "@": path.resolve(__dirname, "./src"),
+          "@c": path.resolve(__dirname, "./src/components"),
+          "@v": path.resolve(__dirname, "./src/views"),
+          "@u": path.resolve(__dirname, "./src/utils"),
+          "@s": path.resolve(__dirname, "./src/service")
+        }, // 别名配置
+        plugins: []
+      }
+      // 将每个依赖包打包成单独的js文件
+      var optimization = {
+        runtimeChunk: "single",
+        splitChunks: {
+          chunks: "all",
+          maxInitialRequests: Infinity,
+          minSize: 20000, // 依赖包超过20000bit将被单独打包
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name (module) {
+                // get the name. E.g. node_modules/packageName/not/this/part.js
+                // or node_modules/packageName
+                const packageName = module.context.match(
+                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+                )[1];
+                // npm package names are URL-safe, but some servers don't like @ symbols
+                return `npm.${packageName.replace("@", "")}`;
+              }
             }
           }
-        }
-      },
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            ecma: undefined,
-            warnings: false,
-            parse: {},
-            compress: {
-              drop_console: true,
-              drop_debugger: false,
-              pure_funcs: ['console.log'] // 移除console
+        },
+        minimizer: [
+          new TerserPlugin({
+            terserOptions: {
+              ecma: undefined,
+              warnings: false,
+              parse: {},
+              compress: {
+                drop_console: true,
+                drop_debugger: false,
+                pure_funcs: ['console.log'] // 移除console
+              }
             }
-          }
-        })
-      ]
+          })
+        ]
+      };
+      Object.assign(config, {
+        optimization
+      });
+    } else {
+      // 开发环境
+      config.mode = 'development'
     }
   },
 
   // 对内部的 webpack 配置（比如修改、增加Loader选项）(链式操作)
-  // chainWebpack: config => {
-  //   // 最小化代码
-  //   config.optimization.minimize(true);
-  //   // 分割代码
-  //   config.optimization.splitChunks({
-  //     chunks: 'all'
-  //   })
-  // },
+  chainWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      // 生产环境
+      config.mode = 'production'
+      // 最小化代码
+      config.optimization.minimize(true);
+      // 分割代码
+      config.optimization.splitChunks({
+        chunks: 'all'
+      })
+    } else {
+      // 开发环境
+      config.mode = 'development'
+    }
+  },
 
   // css的处理
   css: {
     // 当为true时，css文件名可省略 module 默认为 false
-    modules: false,
+    // modules: false,
     // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中,当作为一个库构建时，你也可以将其设置为 false 免得用户自己导入 CSS
     // 默认生产环境下是 true，开发环境下是 false
     extract: true,
@@ -155,9 +173,9 @@ module.exports = {
   // devServer: {
   //   // 自动打开浏览器
   //   open: true,
-  //   host: "192.168.8.199",
+  //   host: "192.168.8.222",
   //   // host: "localhost",
-  //   port: 8083,
+  //   port: 8082,
   //   https: false,
   //   hotOnly: false, // 热模块更新
   //   // 使用代理

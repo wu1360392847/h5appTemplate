@@ -5,11 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <link href="./cssReset.css" type="text/css" rel="stylesheet" />
-    <title>item</title>
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="./cssReset.css">
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <style>
+    html,
+    body {
+      height: 100%;
+    }
+
     .iconfont {
       font-family: "iconfont" !important;
       font-size: 2.1vw;
@@ -19,14 +24,8 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    html,
-    body {
-      height: 100%;
-    }
-
     @font-face {
       font-family: 'iconfont';
-      /* project id 1254287 */
       src: url('//at.alicdn.com/t/font_1254287_84ih537lug5.eot');
       src: url('//at.alicdn.com/t/font_1254287_84ih537lug5.eot?#iefix') format('embedded-opentype'),
         url('//at.alicdn.com/t/font_1254287_84ih537lug5.woff2') format('woff2'),
@@ -38,10 +37,11 @@
 
   <body>
     <noscript>
-      <strong>We're sorry but item doesn't work properly without JavaScript enabled. Please enable it to
-        continue.</strong>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
+    <!-- built files will be auto injected -->
   </body>
 
 </html>

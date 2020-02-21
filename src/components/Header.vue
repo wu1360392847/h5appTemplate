@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="goBack" @click="goBack"></div>
-    <!-- <div class="title">首页</div> -->
+    <!-- <div class="common_header_title_style">首页</div> -->
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .header {
   width: 100%;
   height: 10vw;
@@ -32,17 +32,5 @@ export default {
   transform: rotateZ(45deg);
   margin-left: 4vw;
   margin-top: 3.5vw;
-}
-.title {
-  width: 40%;
-  height: 10vw;
-  line-height: 10vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  text-align: center;
-  margin: 0 auto;
 }
 </style>

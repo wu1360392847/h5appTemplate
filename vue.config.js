@@ -11,10 +11,10 @@ module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? "./" : "./",
 
   // build时构建文件的目录 构建时传入 --no-clean 可关闭该行为
-  outputDir: 'dist',
+  outputDir: 'dist1',
 
   // build时放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录
-  assetsDir: 'assets',
+  assetsDir: '',
 
   // 指定生成的 index.html 的输出路径 (相对于 outputDir)。也可以是一个绝对路径。
   indexPath: 'index.html',
@@ -156,13 +156,19 @@ module.exports = {
     // modules: false,
     // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中,当作为一个库构建时，你也可以将其设置为 false 免得用户自己导入 CSS
     // 默认生产环境下是 true，开发环境下是 false
-    extract: true,
+    extract: process.env.NODE_ENV === "production",
     // 是否为 CSS 开启 source map。设置为 true 之后可能会影响构建的性能
     sourceMap: false,
     //向 CSS 相关的 loader 传递选项(支持 css-loader postcss-loader sass-loader less-loader stylus-loader)
     loaderOptions: {
-      css: {},
-      less: {}
+      // 给 sass-loader 传递选项
+      sass: {
+        // @/ 是 src/ 的别名
+        // 旧
+        // data: `@import "~@/globalstyle.scss";`
+        // 新
+        prependData: `@import "~@/globalstyle.scss";`
+      }
     }
   },
 

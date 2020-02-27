@@ -1,29 +1,16 @@
 /** css 样式重置*/
 html,body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td {margin:0;padding:0;box-sizing:border-box;}
 html,body {font-size:3.5vw;background:#fff;color:#000;overflow:-moz-scrollbars-vertical;}
-body,button,input,select,textarea {color:#000;font-family:arial,'Hiragino Sans GB','Microsoft Yahei','微软雅黑','宋体',Tahoma,Arial,Helvetica;}
+body,button,input,select,textarea {color:#000;font-family:Helvetica, Arial, sans-serif, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', '宋体', Tahoma;}
 dl,dt,dd,ul,ol,li {list-style:none;}
 a {text-decoration:none;color:normal;}
 a:hover {text-decoration:underline;}
-button {outline:none;}
-input {border:0.15vw solid #000;outline:none;}
 legend {color:#000;}
 fieldset,img {border:0;}
-button,input,select,textarea {font-size:100%;}
 table {border-collapse:collapse;border-spacing:0;}
 img {-ms-interpolation-mode:bicubic;}
+button {outline:none;}
+input {border:0.15vw solid #000;outline:none;}
+button,input,select,textarea {font-size:100%;}
 textarea {resize:vertical;}
-/** 公共样式*/
-.left {float:left;}
-.right {float:right;}
-.show {display:none;}
-.block {display:block;}
-.inline {display:inline;}
-.inlineblock {display:inline-block;}
-.error {color:#F00;}
 label,button {cursor:pointer;}
-.wordwrap {word-break:break-all;word-wrap:break-word;}
-/** 清除浮动*/
-.clearfloat {zoom:1;}
-.clearfloat:before {text-decoration:none;}
-.clearfloat:after {content:'.';display:block;clear:both;height:0;visibility:hidden;}

@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import * as $http from './requests/index'
+import './globalstyle.scss'
 
 // 将所有请求数据函数挂载到全局进行使用
 const http = { ...$http.api, ...$http.apiHome }

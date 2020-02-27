@@ -20,9 +20,12 @@
 </template>
 
 <script>
-// @ is an alias to /src
 export default {
   name: 'Home',
+  data () {
+    return {
+    }
+  },
   created () {
     // 请求测试
     this.$http.getSecurityCode().then(res => {
@@ -35,5 +38,5 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 </style>

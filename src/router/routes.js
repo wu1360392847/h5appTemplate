@@ -11,9 +11,11 @@ const Footer = () => import('@/components/Footer.vue')
 
 export default [
   {
+    // 请求路径,这里配置为重定向
     path: '/',
-    redirect: '/login',
+    redirect: '/home',
     meta: {
+      // 用于保存需要传递的验证信息等
       isNav: false
     }
   },
@@ -21,7 +23,8 @@ export default [
     path: '/login',
     name: 'login',
     components: {
-      AppLogin: Login
+      AppLogin: Login,
+      AppHeader: Header
     },
     meta: {
     }
@@ -38,7 +41,7 @@ export default [
       isNav: true,
       title: '首页',
       isAuthRequired: false,
-      icon: '&#xe6f2;'
+      icon: '&#xe636;'
     }
   },
   {
@@ -53,7 +56,7 @@ export default [
       isNav: true,
       title: '钱包',
       isAuthRequired: false,
-      icon: '&#xe6f4;'
+      icon: '&#xe66d;'
     }
   },
   {
@@ -67,8 +70,8 @@ export default [
     meta: {
       isNav: true,
       title: '代理',
-      isAuthRequired: false,
-      icon: '&#xe6f3;'
+      isAuthRequired: true,
+      icon: '&#xe651;'
     }
   },
   {
@@ -82,8 +85,9 @@ export default [
     meta: {
       isNav: true,
       title: '分享',
-      isAuthRequired: false,
-      icon: '&#xe783;'
+      isAuthRequired: true,
+      icon: '&#xe637;'
     }
   }
 ]
+

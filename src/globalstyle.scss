@@ -1,0 +1,84 @@
+/**
+* scss 全局变量
+*
+* 已在vue.config.js挂载到全局
+*
+* 使用:
+* color: $font-color-small;
+*
+* 备注详细变量信息
+*/
+
+/* 文字尺寸 */
+$font-size-small: 3.5vw;
+$font-size-middle: 4.5vw;
+$font-size-big: 5vw;
+
+/* 文字颜色 */
+$font-color-small: #303133;
+$font-color-middle: #606266;
+$font-color-big: #909399;
+
+/* 其他文字颜色 */
+$font-color-title:#fff;
+
+/* 背景颜色 */
+$bg-color-small: #ffffff;
+$bg-color-middle: #e74c3c;
+$bg-color-big: #ffffff;
+
+/* 其他文字颜色 */
+$bg-color-title: #e74c3c;
+
+/* 颜色 */
+$border-color-small: #E4E7ED;
+$border-color-middle: #E4E7ED;
+$border-color-big: #E4E7ED;
+
+/* 边框颜色 */
+$border-table-color-small: 0.15vw solid #999;
+$border-table-color-middle: 0.2vw solid #E4E7ED;
+$border-table-color-big: 0.3vw solid #E4E7ED;
+
+/* 图片加载中颜色 */
+$image-bg-color: #eee;
+
+/* 其他相关颜色 */
+$itme-color-primary:#fa436a;
+$itme-color-success: #4cd964;
+$itme-color-warning: #f0ad4e;
+$itme-color-error: #dd524d;
+
+
+/* 清除浮动 */
+.clearfloat {zoom:1;}
+.clearfloat:before {text-decoration:none;}
+.clearfloat:after {content:'.';display:block;clear:both;height:0;visibility:hidden;}
+
+/* 公共样式 */
+.left {
+  float:left;
+}
+.right {
+  float:right;
+}
+.show {
+  display:none;
+}
+.block {
+  display:block;
+}
+.inline {
+  display:inline;
+}
+.inlineblock {
+  display:inline-block;
+}
+.error {
+  color:#F00;
+}
+.wordwrap {
+  word-break:break-all;
+  word-wrap:break-word;
+}
+

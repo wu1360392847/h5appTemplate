@@ -1,7 +1,6 @@
 <template>
   <div class="header">
     <div class="goBack" @click="goBack"></div>
-    <!-- <div class="common_header_title_style">首页</div> -->
   </div>
 </template>
 
@@ -18,19 +17,19 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .header {
   width: 100%;
   height: 10vw;
-  background-color: #e74c3c;
+  background: $bg-color-title;
 }
 .goBack {
-  width: 3vw;
-  height: 3vw;
-  border-left: 0.8vw solid #fff;
-  border-bottom: 0.8vw solid #fff;
+  width: 2.5vw;
+  height: 2.5vw;
+  border-left: $border-table-color-small;
+  border-bottom: $border-table-color-small;
   transform: rotateZ(45deg);
   margin-left: 4vw;
-  margin-top: 3.5vw;
+  margin-top: 3.6vw;
 }
 </style>

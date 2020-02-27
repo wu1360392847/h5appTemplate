@@ -10,7 +10,7 @@ import * as apiHome from './api/home'
 // import rootVueObj from '../main.js'
 
 // 不同环境不同地址
-let apis = {
+const apis = {
   production: 'http://www.api.kxf968.com', // 线上 (生成环境)
   development: 'http://192.168.8.170:80', // 本地 (开发环境)
   accessHomeData: 'http://www.xmyxapp.com' // 其他api

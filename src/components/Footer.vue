@@ -1,12 +1,14 @@
 <template>
-  <ul>
-    <li v-for="nav in navs" :key="nav.name" class="tabbar">
-      <router-link :to="nav.path" tag="span">
-        <i v-html="nav.meta.icon"></i>
-        <p>{{nav.meta.title}}</p>
-      </router-link>
-    </li>
-  </ul>
+  <div>
+    <ul>
+      <li v-for="nav in navs" :key="nav.name" class="tabbar">
+        <router-link :to="nav.path" tag="span">
+          <i v-html="nav.meta.icon"></i>
+          <p>{{nav.meta.title}}</p>
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -21,7 +23,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .tabbar {
   width: 25%;
   text-align: center;
@@ -31,7 +33,7 @@ ul {
   display: flex;
   width: 100%;
   height: 100%;
-  border-top: 0.1vw solid #999;
+  border-top: $border-table-color-small;
 }
 p {
   font-size: 3vw;

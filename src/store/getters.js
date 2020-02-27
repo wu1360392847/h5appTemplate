@@ -3,5 +3,9 @@
  */
 
 export default {
-
+  // 登录
+  isLogin (state) {
+    state.isLogin = JSON.parse(localStorage.isLogin)
+    return state.isLogin
+  },
 }

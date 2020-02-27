@@ -23,5 +23,15 @@ export default {
     }
     // 保存到 localStorage
     localStorage.setItem('cart', JSON.stringify(state.cart))
-  }
+  },
+  // 登录成功
+  loginSuccess (state) {
+    state.isLogin = true
+    localStorage.isLogin = true
+  },
+  // 退出登录
+  logExit (state) {
+    state.isLogin = false
+    localStorage.isLogin = false
+  },
 }

@@ -9,9 +9,13 @@
 
 <script>
 export default {
-  name: 'agent'
+  name: 'agent',
+  data () {
+    return {
+    }
+  }
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 </style>

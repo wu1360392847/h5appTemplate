@@ -26,12 +26,13 @@
 
     @font-face {
       font-family: 'iconfont';
-      src: url('//at.alicdn.com/t/font_1254287_84ih537lug5.eot');
-      src: url('//at.alicdn.com/t/font_1254287_84ih537lug5.eot?#iefix') format('embedded-opentype'),
-        url('//at.alicdn.com/t/font_1254287_84ih537lug5.woff2') format('woff2'),
-        url('//at.alicdn.com/t/font_1254287_84ih537lug5.woff') format('woff'),
-        url('//at.alicdn.com/t/font_1254287_84ih537lug5.ttf') format('truetype'),
-        url('//at.alicdn.com/t/font_1254287_84ih537lug5.svg#iconfont') format('svg');
+      /* project id 1657703 */
+      src: url('//at.alicdn.com/t/font_1657703_a7t2qx1p51.eot');
+      src: url('//at.alicdn.com/t/font_1657703_a7t2qx1p51.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_1657703_a7t2qx1p51.woff2') format('woff2'),
+        url('//at.alicdn.com/t/font_1657703_a7t2qx1p51.woff') format('woff'),
+        url('//at.alicdn.com/t/font_1657703_a7t2qx1p51.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_1657703_a7t2qx1p51.svg#iconfont') format('svg');
     }
   </style>
 
@@ -43,5 +44,79 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script type="text/javascript">
+    let i = 0;
+    let first = 0;
+    document.addEventListener('plusready', function () {
+      let webview = plus.webview.currentWebview();
+      plus.key.addEventListener('backbutton', function () {
+        webview.canBack(function (e) {
+          i = 0
+          if (e.canBack) {
+            // console.log('有历史记录')
+            if (window.location.hash == '#/home' || window.location.hash == '#/wallet' || window.location.hash == '#/agent' || window.location.hash == '#/share') {
+              // console.log('是否为四大菜单')
+              // 首页四大菜单返回键处理
+              // 处理逻辑：1秒内，连续两次按返回键，则退出应用；
+              plus.key.addEventListener('backbutton', function () {
+                i++
+                if (i == 1) {
+                  // console.log('调用了几次')
+                  // console.log('first是没有值：' + first)
+                  // 首次按键，提示‘再按一次退出应用’
+                  if (first == 0) {
+                    first = new Date().getTime();
+                    // console.log('first是有值：' + first)
+                    // console.log('再按一次退出应用');
+                    plus.nativeUI.toast('再按一次退出应用')
+                    setTimeout(function () {
+                      first = 0;
+                    }, 1500);
+                    // console.log('first是有值：' + first)
+                  } else {
+                    // console.log('准备退出')
+                    if (new Date().getTime() - first < 1500) {
+                      // console.log('成功准备退出')
+                      plus.runtime.quit();
+                    }
+                  }
+                }
+              }, false);
+            } else {
+              // console.log('不是四大菜单返回')
+              webview.back();
+            }
+          } else {
+            // console.log('无历史记录')
+            // 处理逻辑：1秒内，连续两次按返回键，则退出应用；
+            plus.key.addEventListener('backbutton', function () {
+              i = 1
+              if (i == 1) {
+                // console.log('调用了几次')
+                // console.log('first是没有值：' + first)
+                // 首次按键，提示‘再按一次退出应用’
+                if (first == 0) {
+                  first = new Date().getTime();
+                  // console.log('first是有值：' + first)
+                  // console.log('再按一次退出应用');
+                  plus.nativeUI.toast('再按一次退出应用')
+                  setTimeout(function () {
+                    first = 0;
+                  }, 1500);
+                  // console.log('first是有值：' + first)
+                } else {
+                  // console.log('准备退出')
+                  if (new Date().getTime() - first < 1500) {
+                    // console.log('成功准备退出')
+                    plus.runtime.quit();
+                  }
+                }
+              }
+            }, false);
+          }
+        });
+      });
+    });
+  </script>
 
 </html>

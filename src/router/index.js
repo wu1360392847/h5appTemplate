@@ -17,6 +17,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+
   // 判断是否需要权限才能访问
   if (to.meta.isAuthRequired === true) {
     // 判断是否登录
